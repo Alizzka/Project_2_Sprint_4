@@ -53,12 +53,25 @@ public class OrderScooterTest {
         pageOrder.closeCookieBanner();
     }
 
+    //Заказ по верхней кнопке:
     @Test
-    public void testOrderScooter() {
+    public void testOrderScooterThroughHeaderButton() {
+        pageOrder.clickOrderButtonHeader(); // Нажатие на верхнюю кнопку "Заказать"
         pageOrder.enterDataFirstPageOrder(name, surname, address, metro, phoneNumber);
         pageOrder.enterDataSecondPageOrder(color, date, rentalDays, comment);
         assertTrue(pageOrder.successfullyText());
     }
+
+    //для заказа по нижней кнопке:
+    @Test
+    public void testOrderScooterThroughDownButton() {
+        pageOrder.scrollPageOrder(); // Скролим страницу
+        pageOrder.clickOrderButtonDown(); // Нажатие на нижнюю кнопку "Заказать"
+        pageOrder.enterDataFirstPageOrder(name, surname, address, metro, phoneNumber);
+        pageOrder.enterDataSecondPageOrder(color, date, rentalDays, comment);
+        assertTrue(pageOrder.successfullyText());
+    }
+
 
     @After
     public void teardown() {

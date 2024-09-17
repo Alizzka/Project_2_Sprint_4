@@ -6,10 +6,7 @@
 - Проверить, что появилось всплывающее окно с сообщением об успешном создании заказа.*/
 
 package pageobjects;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class PageOrder {
 
     // Локаторы для первой страницы
     private static final By OrderButtonHeader = By.xpath("//*[@id='root']/div/div[1]/div[1]/div[2]/button[1]");
-    private static final By OrderButtonDown = By.className("Button_UltraBig__UU3Lp");
+    private static final By OrderButtonDown = By.xpath("//*[@id='root']/div/div/div[4]/div[2]/div[5]/button");
     private static final By NameButton = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[1]/input");
     private static final By SurnameButton = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[2]/input");
     private static final By AddressButton = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[3]/input");
@@ -48,9 +45,24 @@ public class PageOrder {
         driver.findElement(CookieBannerButton).click();
     }
 
+    //Скролл до элемента кнопки "Заказать"
+    public void scrollPageOrder() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
+                driver.findElement(OrderButtonDown));
+    }
+
+    // Нажатие на нижнюю кнопку "Заказать"
+    public void clickOrderButtonDown() {
+        driver.findElement(OrderButtonDown).click();
+    }
+
+    // Нажатие на верхнюю кнопку "Заказать"
+    public void clickOrderButtonHeader() {
+        driver.findElement(OrderButtonHeader).click();
+    }
+
     // Заполнение первой страницы заказа
     public void enterDataFirstPageOrder(String name, String surname, String address, int metro, String phoneNumber) {
-        driver.findElement(OrderButtonHeader).click();  // Нажатие на кнопку "Заказать"
         driver.findElement(NameButton).sendKeys(name);  // Заполнение поля "Имя"
         driver.findElement(SurnameButton).sendKeys(surname);  // Заполнение поля "Фамилия"
         driver.findElement(AddressButton).sendKeys(address);  // Заполнение поля "Адрес"
