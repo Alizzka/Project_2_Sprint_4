@@ -7,8 +7,10 @@
 
 package pageobjects;
 import org.openqa.selenium.*;
-
 import java.util.List;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class PageOrder {
     private final WebDriver driver;
